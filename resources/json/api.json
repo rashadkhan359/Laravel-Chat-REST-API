@@ -19,15 +19,22 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{baseURLAPI}}/login",
-							"host": [
-								"{{baseURLAPI}}"
-							],
-							"path": [
-								"login"
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "maria.osinski@example.net",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								}
 							]
-						}
+						},
+						"url": "{{baseURLAPI}}/login"
 					},
 					"response": []
 				},
@@ -82,16 +89,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{baseURLAPI}}/v1/register",
-							"host": [
-								"{{baseURLAPI}}"
-							],
-							"path": [
-								"v1",
-								"register"
-							]
-						}
+						"url": "{{baseURLAPI}}/register"
 					},
 					"response": []
 				}
@@ -102,9 +100,44 @@
 			"item": [
 				{
 					"name": "Conversations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseURLAPI}}/v1/conversations",
+							"host": [
+								"{{baseURLAPI}}"
+							],
+							"path": [
+								"v1",
+								"conversations"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "direct",
+									"disabled": true
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -133,36 +166,70 @@
 									"type": "text"
 								},
 								{
-									"key": "user_ids",
+									"key": "user_ids[]",
 									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "message",
-									"value": "Hi",
+									"value": "Hello",
+									"type": "text"
+								},
+								{
+									"key": "user_ids[]",
+									"value": "20",
 									"type": "text"
 								}
 							]
 						},
-						"url": {
-							"raw": "{{baseURLAPI}}/v1/conversations/store",
-							"host": [
-								"{{baseURLAPI}}"
-							],
-							"path": [
-								"v1",
-								"conversations",
-								"store"
-							]
-						}
+						"url": "{{baseURLAPI}}/v1/conversations"
 					},
 					"response": []
 				},
 				{
 					"name": "Update",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "action",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "icon",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "{{baseURLAPI}}/v1/conversations"
 					},
 					"response": []
 				}
@@ -191,40 +258,64 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "content",
-									"value": "",
-									"type": "text"
+									"key": "message",
+									"value": "Everything working fine",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/rasha/Downloads/logo.ico"
 								}
 							]
 						},
-						"url": {
-							"raw": "{{baseURLAPI}}/v1/messages/7",
-							"host": [
-								"{{baseURLAPI}}"
-							],
-							"path": [
-								"v1",
-								"messages",
-								"7"
-							]
-						}
+						"url": "{{baseURLAPI}}/v1/messages/7"
 					},
 					"response": []
 				},
 				{
 					"name": "Show Message",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"lastMessageId\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURLAPI}}/v1/messages/7"
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		},
 		{
 			"name": "Users",
@@ -242,12 +333,7 @@
 						"type": "text"
 					}
 				],
-				"url": {
-					"raw": "{{baseURLAPI}}",
-					"host": [
-						"{{baseURLAPI}}"
-					]
-				}
+				"url": "{{baseURLAPI}}/v1/users"
 			},
 			"response": []
 		}
