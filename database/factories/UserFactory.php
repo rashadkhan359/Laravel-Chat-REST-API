@@ -24,6 +24,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $avatar = fake()->imageUrl();
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),

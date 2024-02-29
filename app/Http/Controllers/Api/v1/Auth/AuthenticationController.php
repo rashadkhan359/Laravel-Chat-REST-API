@@ -32,7 +32,7 @@ class AuthenticationController
 
             return ApiResponse::success($tokenData, 'Login successfull.')->respond();
         }
-        
+
 
         return ApiResponse::error('Invalid credentials', Response::HTTP_UNAUTHORIZED)->respond();
     }
@@ -40,7 +40,10 @@ class AuthenticationController
     // Register (create user and issue API token)
     public function register(CreateUserRequest $request)
     {
-        $avatar = null;
+        $avatar = [
+            'image' => null,
+            'thumbnail' => null
+        ];
 
         if($request->hasFile('avatar')){
             $imageService = new ImageService();

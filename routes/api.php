@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthenticationController::class, 'login']);
 Route::post('register', [AuthenticationController::class, 'register']);
+
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
     // @intelephense disable P1009
     Route::resource('users', UserController::class);
@@ -32,4 +33,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
     Route::put('/messages/{message}', [MessageController::class, 'update']);
     Route::delete('/{conversation}/messages/{message}', [MessageController::class, 'delete']);
 });
+
 
